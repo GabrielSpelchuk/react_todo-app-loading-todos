@@ -81,7 +81,7 @@ export const App: React.FC = () => {
             </section>
 
             {/* Hide the footer if there are no todos */}
-            {fitlered?.length !== 0 && (
+            {todos.length !== 0 && (
               <TodoFooter
                 todoCount={fitlered?.length}
                 filter={filter}
