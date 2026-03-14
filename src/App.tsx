@@ -7,6 +7,7 @@ import { Todo } from './types/Todo';
 import { TodoList } from './components/TodoList';
 import { TodoHeader } from './components/TodoHeader';
 import { TodoFooter } from './components/TodoFooter';
+import { ErrorMessage } from './components/ErrorMessage';
 
 export const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -82,29 +83,14 @@ export const App: React.FC = () => {
 
             {/* Hide the footer if there are no todos */}
             {todos.length !== 0 && (
-              <TodoFooter
-                todoCount={fitlered?.length}
-                filter={filter}
-                setFilter={setFilter}
-              />
+              <TodoFooter todos={todos} filter={filter} setFilter={setFilter} />
             )}
           </div>
 
-          {/* DON'T use conditional rendering to hide the notification */}
-          {/* Add the 'hidden' class to hide the message smoothly */}
-          <div
-            data-cy="ErrorNotification"
-            className={`notification is-danger is-light has-text-weight-normal ${!errorMessage ? 'hidden' : ''}`}
-          >
-            <button
-              data-cy="HideErrorButton"
-              type="button"
-              className="delete"
-              onClick={() => setErrorMessage(null)}
-            />
-
-            {errorMessage}
-          </div>
+          <ErrorMessage
+            errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
+          />
         </>
       )}
     </div>
