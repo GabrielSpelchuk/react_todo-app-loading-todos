@@ -8,11 +8,12 @@ import { TodoList } from './components/TodoList';
 import { TodoHeader } from './components/TodoHeader';
 import { TodoFooter } from './components/TodoFooter';
 import { ErrorMessage } from './components/ErrorMessage';
+import EFilter from './utils/EFilter';
 
 export const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState<EFilter>(EFilter.all);
   const [fitlered, setFiltered] = useState<Todo[]>();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -37,15 +38,15 @@ export const App: React.FC = () => {
   useEffect(() => {
     const newTodo = [...todos];
 
-    if (filter === 'active') {
+    if (filter === EFilter.active) {
       setFiltered(newTodo.filter(todo => !todo.completed));
     }
 
-    if (filter === 'completed') {
+    if (filter === EFilter.completed) {
       setFiltered(newTodo.filter(todo => todo.completed));
     }
 
-    if (filter === 'all') {
+    if (filter === EFilter.all) {
       setFiltered(newTodo);
     }
   }, [filter, todos]);

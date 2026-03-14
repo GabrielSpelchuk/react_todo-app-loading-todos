@@ -1,10 +1,11 @@
 import classNames from 'classnames';
 import { Todo } from '../types/Todo';
+import EFilter from '../utils/EFilter';
 
 interface ITodoFooter {
   todos: Todo[] | undefined;
-  filter: string;
-  setFilter: (filter: string) => void;
+  filter: EFilter;
+  setFilter: (filter: EFilter) => void;
 }
 
 export const TodoFooter: React.FC<ITodoFooter> = ({
@@ -25,10 +26,10 @@ export const TodoFooter: React.FC<ITodoFooter> = ({
         <a
           href="#/"
           className={classNames('filter__link', {
-            selected: filter === 'all',
+            selected: filter === EFilter.all,
           })}
           data-cy="FilterLinkAll"
-          onClick={() => setFilter('all')}
+          onClick={() => setFilter(EFilter.all)}
         >
           All
         </a>
@@ -36,10 +37,10 @@ export const TodoFooter: React.FC<ITodoFooter> = ({
         <a
           href="#/active"
           className={classNames('filter__link', {
-            selected: filter === 'active',
+            selected: filter === EFilter.active,
           })}
           data-cy="FilterLinkActive"
-          onClick={() => setFilter('active')}
+          onClick={() => setFilter(EFilter.active)}
         >
           Active
         </a>
@@ -47,10 +48,10 @@ export const TodoFooter: React.FC<ITodoFooter> = ({
         <a
           href="#/completed"
           className={classNames('filter__link', {
-            selected: filter === 'completed',
+            selected: filter === EFilter.completed,
           })}
           data-cy="FilterLinkCompleted"
-          onClick={() => setFilter('completed')}
+          onClick={() => setFilter(EFilter.completed)}
         >
           Completed
         </a>
